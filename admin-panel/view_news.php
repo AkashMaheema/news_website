@@ -43,6 +43,7 @@ if (isset($_GET['delete_id'])) {
                 echo "<div class='news-card-body'>";
                 echo "<h2>" . $row['title'] . "</h2>";
                 echo "<p>" . $row['description'] . "</p>";
+                echo "<p>" . $row['author'] . "</p>";
                 echo "</div>";
                 echo "<div class='news-card-btns'>";
                 echo "<a href='edit_news.php?id=" . $row['id'] . "'>Edit</a>";

@@ -16,17 +16,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $category = $_POST['category'];
     $title = $_POST['title'];
     $desc = $_POST['description'];
+    $author = $_POST['author'];
 
     if (!empty($_FILES['image']['name'])) {
         $image = "uploads/" . basename($_FILES["image"]["name"]);
         move_uploaded_file($_FILES["image"]["tmp_name"], $image);
-        $query = "UPDATE news SET category='$category', title='$title', description='$desc', image='$image' WHERE id=$id";
+        $query = "UPDATE news SET category='$category', title='$title', author='$author', description='$desc', image='$image' WHERE id=$id";
     } else {
-        $query = "UPDATE news SET category='$category', title='$title', description='$desc' WHERE id=$id";
+        $query = "UPDATE news SET category='$category', title='$title', author='$author', description='$desc' WHERE id=$id";
     }
 
     $conn->query($query);
     echo "<p class='success'>News updated successfully.</p>";
+    header("Location: view_news.php");
 }
 ?>
 <html>
@@ -43,6 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <form method="post" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                 Category: <input type="text" name="category" value="<?php echo $row['category']; ?>" required><br>
+                Author: <input type="text" name="author" value="<?php echo $row['author']; ?>" required><br>
                 Title: <input type="text" name="title" value="<?php echo $row['title']; ?>" required><br>
                 Description: <textarea name="description" required><?php echo $row['description']; ?></textarea><br>
                 Image: <input type="file" name="image"><br>

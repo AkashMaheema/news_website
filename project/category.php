@@ -53,6 +53,7 @@ $result = $conn->query($sql);
                 <?php
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
+                        echo "<a href='article.php?id=" . $row['id'] . "'>";
                         echo "<div class='news-card'>";
                         echo "<img src='../admin-panel/" . $row['image'] . "' alt='News Image'>";
                         echo "<div class='news-card-body'>";
@@ -62,6 +63,7 @@ $result = $conn->query($sql);
                         echo "<p><small>Author : " . $row['author'] . "</small></p>";
                         echo "</div>";
                         echo "</div>";
+                        echo "</a>";
                     }
                 } else {
                     echo "<p>No news articles found in this category.</p>";

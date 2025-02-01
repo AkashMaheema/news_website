@@ -12,9 +12,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 <html>
+
 <head>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <h2>Register Admin</h2>
     <form method="post">
@@ -23,4 +25,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="submit" value="Register">
     </form>
 </body>
+
 </html>

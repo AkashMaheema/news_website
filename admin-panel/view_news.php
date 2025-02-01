@@ -1,10 +1,33 @@
 <?php
+session_start();
 require 'db_connect.php';
+if (!isset($_SESSION['admin'])) {
+    header("Location: index.php");
+    exit();
+}
+
+// Handle delete request
+if (isset($_GET['delete_id'])) {
+    $delete_id = intval($_GET['delete_id']);
+    $stmt = $conn->prepare("DELETE FROM news WHERE id = ?");
+    $stmt->bind_param("i", $delete_id);
+    $stmt->execute();
+    $stmt->close();
+    header("Location: view_news.php");
+    exit();
+}
 ?>
 <html>
 
 <head>
     <link rel="stylesheet" href="styles.css">
+    <script>
+        function confirmDelete(id) {
+            if (confirm("Are you sure you want to delete this news article?")) {
+                window.location.href = "view_news.php?delete_id=" + id;
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -23,7 +46,7 @@ require 'db_connect.php';
                 echo "</div>";
                 echo "<div class='news-card-btns'>";
                 echo "<a href='edit_news.php?id=" . $row['id'] . "'>Edit</a>";
-                echo "<a href='delete_news.php?id=" . $row['id'] . "'>Delete</a>";
+                echo "<button onclick='confirmDelete(" . $row['id'] . ")'>Delete</button>";
                 echo "</div>";
                 echo "</div>";
             }

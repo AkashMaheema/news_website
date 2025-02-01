@@ -1,6 +1,11 @@
 <!-- edit_news.php -->
 <?php
+session_start();
 require 'db_connect.php';
+if (!isset($_SESSION['admin'])) {
+    header("Location: index.php");
+    exit();
+}
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $result = $conn->query("SELECT * FROM news WHERE id=$id");

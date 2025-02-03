@@ -56,7 +56,7 @@ if (!$article) {
             <p><small>Published on: <?php echo $article['timestamp']; ?></small></p>
             <p><small>Author: <?php echo htmlspecialchars($article['author']); ?></small></p>
             <img src="../admin-panel/<?php echo htmlspecialchars($article['image']); ?>" alt="News Image">
-            <p><?php echo nl2br(htmlspecialchars($article['description'])); ?></p>
+            <p><?php echo nl2br(htmlspecialchars($article['content'])); ?></p>
         </article>
     </main>
 
